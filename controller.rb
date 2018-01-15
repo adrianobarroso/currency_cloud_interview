@@ -2,18 +2,18 @@ class Controller
   def initialize(user)
     @user = user
     @view = View.new
-  end
-
-  def list_recipients
-    headers = {
+    @headers = {
       :content_type => 'application/json',
       :authorization => "Bearer #{@user.token}"
     }
-    name = @view.list_or_seach_recipient
-    suffix = name.empty? ? '' : "?name=#{name}"
-    url = "https://coolpay.herokuapp.com/api/recipients" + suffix
-    response = RestClient.get url, headers
+  end
+
+  def list_recipients
+    @view.request
+    url = "https://coolpay.herokuapp.com/api/recipients"
+    response = RestClient.get url, @headers
     @view.list_recipients(JSON.parse(response))
+    JSON.parse(response)
   end
 
   def create_recipient
@@ -22,10 +22,28 @@ class Controller
         name: @view.name_recipient
       }
     }
-    headers = {
-      :content_type => 'application/json',
-      :authorization => "Bearer #{@user.token}"
+    @view.request
+    RestClient.post 'https://coolpay.herokuapp.com/api/recipients', values, @headers
+  end
+
+  def list_payments
+    @view.request
+    response = RestClient.get 'https://coolpay.herokuapp.com/api/payments', @headers
+    @view.list_payments(JSON.parse(response))
+  end
+
+  def send_payment
+    @view.request
+    recipients = list_recipients
+    recipient = @view.choose_recipient(recipients)
+    values = {
+      "payment": {
+        "amount": @view.amount_payment(recipient).to_f,
+        "currency": "GBP",
+        "recipient_id": recipient['id']
+      }
     }
-    RestClient.post 'https://coolpay.herokuapp.com/api/recipients', values, headers
+    @view.request
+    RestClient.post 'https://coolpay.herokuapp.com/api/payments', values, @headers
   end
 end

@@ -11,19 +11,17 @@ require_relative 'router'
 
 session_user = SessionUser.new
 @user = session_user.sign_in
+puts "Welcome to the CoolAPI interface!"
+puts ""
+puts "You are now authenticated:"
+puts ""
+puts "user: #{@user.name}"
+puts "apikey: #{@user.apikey}"
+puts "token: #{@user.token}"
+puts ""
+
 controller = Controller.new(@user)
 router = Router.new(controller)
 
 # Start the app
 router.run
-# values = '{
-#   "username": "Adriano",
-#   "apikey": "CDA8772865C0CC3C"
-# }'
-#
-# headers = {
-#   :content_type => 'application/json'
-# }
-#
-# response = RestClient.post 'https://coolpay.herokuapp.com/api/login', values, headers
-# puts response

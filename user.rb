@@ -1,14 +1,14 @@
 class User
-  attr_reader :token
-  def initialize(username, apikey)
-    @username = username
+  attr_reader :token, :name, :apikey
+  def initialize(name, apikey)
+    @name = name
     @apikey = apikey
     @token = nil
   end
 
   def authenticate
     values = {
-      username: @username,
+      username: @name,
       apikey: @apikey
     }
 
