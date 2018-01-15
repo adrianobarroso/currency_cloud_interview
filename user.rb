@@ -15,7 +15,8 @@ class User
     headers = {
       :content_type => 'application/json'
     }
-    response = RestClient.post('https://coolpay.herokuapp.com/api/login', values, headers){|response, request, result| response }
+    url = 'https://coolpay.herokuapp.com/api/login'
+    response = RestClient.post(url, values, headers) { |response, request, result| response }
 
     @token = JSON.parse(response)['token'] unless response.code == 404
   end

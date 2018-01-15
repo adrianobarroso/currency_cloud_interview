@@ -9,9 +9,10 @@ require_relative 'controller'
 require_relative 'session_user'
 require_relative 'router'
 
-controller = Controller.new
 session_user = SessionUser.new
-router = Router.new(controller, session_user)
+@user = session_user.sign_in
+controller = Controller.new(@user)
+router = Router.new(controller)
 
 # Start the app
 router.run
