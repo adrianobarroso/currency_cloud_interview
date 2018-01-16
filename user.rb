@@ -1,3 +1,6 @@
+require 'rest_client'
+require 'JSON'
+
 class User
   attr_reader :token, :name, :apikey
   def initialize(name, apikey)
