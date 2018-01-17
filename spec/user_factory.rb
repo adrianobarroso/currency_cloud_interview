@@ -1,5 +1,5 @@
 begin
-  require_relative '../user'
+  require 'user'
 rescue LoadError
   class User; end
 end

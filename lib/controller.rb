@@ -1,4 +1,5 @@
 class Controller
+  attr_reader :user
   def initialize(user)
     @user = user
     @view = View.new
