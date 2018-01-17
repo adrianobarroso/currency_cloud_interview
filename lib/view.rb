@@ -30,10 +30,10 @@ class View
     end
   end
 
-  def name_recipient
+  def name_recipient(stdin: $stdin)
     puts ""
     printf "What is the name of recipient you want to create?\n->"
-    gets.chomp
+    stdin.gets.chomp
   end
 
   def list_payments(payments)

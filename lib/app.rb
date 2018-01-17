@@ -1,5 +1,3 @@
-require 'rubygems' if RUBY_VERSION < '1.9'
-require 'rest_client'
 require 'JSON'
 require 'pry-byebug'
 
