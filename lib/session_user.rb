@@ -4,8 +4,9 @@ class SessionUser
   end
 
   def sign_in
-    # name, pass = @view.login_welcome
-    @user = User.new('Adriano', "CDA8772865C0CC3C")
+    # @user = User.new('Adriano', "CDA8772865C0CC3C")
+    name, pass = @view.login_welcome
+    @user = User.new(name, pass)
     @user.authenticate
     if @user.logged?
       greeting(@user)
