@@ -1,11 +1,11 @@
 require 'JSON'
 require 'pry-byebug'
 
-require_relative 'user'
-require_relative 'view'
-require_relative 'controller'
-require_relative 'session_user'
-require_relative 'router'
+require_relative 'lib/user'
+require_relative 'lib/view'
+require_relative 'lib/controller'
+require_relative 'lib/session_user'
+require_relative 'lib/router'
 
 session_user = SessionUser.new
 @user = session_user.sign_in
